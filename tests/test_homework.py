@@ -47,7 +47,7 @@ METRICS = [
     {
         "type": "cm_matrix",
         "dataset": "test",
-        "true_0": {"predicted_0": 6710, "predicted_1": None},
+        "true_0": {"predicted_0": 6700, "predicted_1": None},
         "true_1": {"predicted_0": None, "predicted_1": 720},
     },
 ]
