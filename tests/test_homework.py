@@ -28,7 +28,7 @@ METRICS = [
         "precision": 0.691,
         "balanced_accuracy": 0.650,
         "recall": 0.360,
-        "f1_score": 0.482,
+        "f1_score": 0.470,
     },
     {
         "type": "metrics",
@@ -36,7 +36,7 @@ METRICS = [
         "precision": 0.600,
         "balanced_accuracy": 0.650,
         "recall": 0.360,
-        "f1_score": 0.482,
+        "f1_score": 0.470,
     },
     {
         "type": "cm_matrix",
