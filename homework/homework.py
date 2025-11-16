@@ -140,6 +140,9 @@ def clean_data(df):
     """
     Limpia un dataframe según las especificaciones del problema.
     """
+    # Crear copia explícita para evitar modificar el dataframe original
+    df = df.copy()
+    
     # Renombrar la columna "default payment next month" a "default"
     df = df.rename(columns={'default payment next month': 'default'})
     
@@ -150,8 +153,8 @@ def clean_data(df):
     # Eliminar registros con información no disponible (valores nulos)
     df = df.dropna()
     
-    # Para la columna EDUCATION, agrupar valores > 4 en la categoría "others" (4)
-    df['EDUCATION'] = df['EDUCATION'].apply(lambda x: 4 if x > 4 else x)
+    # Para la columna EDUCATION, agrupar valores > 4 o <= 0 (N/A) en la categoría "others" (4)
+    df['EDUCATION'] = df['EDUCATION'].apply(lambda x: 4 if x > 4 or x <= 0 else x)
     
     return df
 
@@ -190,10 +193,11 @@ def create_pipeline():
         ])
     
     # Crear el pipeline
+    # Nota: StandardScaler antes de PCA es mejor práctica ya que PCA es sensible a la escala
     pipeline = Pipeline([
         ('preprocessor', preprocessor),
-        ('pca', PCA()),
         ('scaler', StandardScaler()),
+        ('pca', PCA()),
         ('selectkbest', SelectKBest(score_func=f_classif)),
         ('svc', SVC())
     ])
@@ -207,8 +211,9 @@ def optimize_model(pipeline, x_train, y_train):
     """
     # Definir el grid de hiperparámetros
     # Grid optimizado para encontrar mejores hiperparámetros
+    # Incluye None para PCA para usar todas las componentes según especificación
     param_grid = {
-        'pca__n_components': [10, 15, 20],
+        'pca__n_components': [10, 15, 20, None],
         'selectkbest__k': [10, 15, 20],
         'svc__C': [0.1, 1, 10],
         'svc__kernel': ['rbf'],
