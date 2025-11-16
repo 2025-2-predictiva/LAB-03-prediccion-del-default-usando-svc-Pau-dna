@@ -27,7 +27,7 @@ METRICS = [
         "dataset": "train",
         "precision": 0.691,
         "balanced_accuracy": 0.650,
-        "recall": 0.370,
+        "recall": 0.360,
         "f1_score": 0.482,
     },
     {
@@ -35,7 +35,7 @@ METRICS = [
         "dataset": "test",
         "precision": 0.600,
         "balanced_accuracy": 0.650,
-        "recall": 0.370,
+        "recall": 0.360,
         "f1_score": 0.482,
     },
     {
