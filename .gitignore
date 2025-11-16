@@ -164,5 +164,3 @@ cython_debug/
 #.idea/
 
 # Generated models and output (will be created when running homework.py)
-files/models/
-files/output/
